@@ -1,38 +1,54 @@
-<div class="card border-primary">
-    <div class="card-header">
-        <h5 class="card-title">AES Crypto</h5>
-        <ul class="nav nav-tabs card-header-tabs" data-bs-tabs="tabs">
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="true" data-bs-toggle="tab" href="#encrypt">Encrypt</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" href="#decrypt">Decrypt</a>
-            </li>
-        </ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AES Crypto</title>
+    <!-- Include Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="card border-primary">
+        <div class="card-header">
+            <h5 class="card-title">AES Crypto</h5>
+            <ul class="nav nav-tabs card-header-tabs" data-bs-tabs="tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="true" data-bs-toggle="tab" href="#encrypt">Encrypt</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="tab" href="#decrypt">Decrypt</a>
+                </li>
+            </ul>
+        </div>
+        <form class="card-body tab-content text-primary">
+            <div class="tab-pane active" id="encrypt">
+                <form>
+                    <div class="mb-3">
+                        <label for="txtText" class="form-label">Text</label>
+                        <input type="text" class="form-control" id="txtText" placeholder="Text">
+                    </div>
+                    <div class="mb-3">
+                        <label for="txtKey" class="form-label">Key</label>
+                        <input type="password" class="form-control" id="txtKey" placeholder="Key" autocomplete="new-password">
+                    </div>
+                    <div class="mb-3">
+                        <div class="form-floating">
+                            <textarea class="form-control" placeholder="Encrypted" id="txtEncrypt"></textarea>
+                            <label for="txtEncrypt">Encrypted</label>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary" id="btnCopy">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <button type="button" class="btn btn-primary" id="btnReset">
+                        <i class="fas fa-sync-alt"></i> Reset
+                    </button>
+                </form>
+            </div>
+            <p id="lblMessage" class="text-success mt-2"></p>
+        </form>
     </div>
-    <form class="card-body tab-content text-primary">
-        <div class="tab-pane active" id="encrypt">
-            <form>
-                <div class="mb-3">
-                    <label for="txtText" class="form-label">Text</label>
-                    <input type="text" class="form-control" id="txtText" placeholder="Text">
-                </div>
-                <div class="mb-3">
-                    <label for="txtKey" class="form-label">Key</label>
-                    <input type="text" class="form-control" id="txtKey" placeholder="Key" autocomplete="new-password">
-                </div>
-                <div class="mb-3">
-                    <label for="txtEncrypt" class="form-label">Encrypt</label>
-                    <input type="text" class="form-control" id="txtEncrypt" placeholder="Encrypted">
-                </div>
-                <button type="button" class="btn btn-primary">Copy</button>
-            </form>
-        </div>
-        <div class="tab-pane" id="decrypt">
-            <p class=" card-text">Decrypted</p>
-        </div>
-        <button class="btn btn-primary" type="submit">Save</button>
-    </form>
-</div>
-<script src="crypto-aes.js"></script>
-<script src="aes.js"></script>
+    <script src="crypto-aes.js"></script>
+    <script src="aes.js"></script>
+</body>
+</html>

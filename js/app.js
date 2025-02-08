@@ -4,7 +4,6 @@ class App {
         this.fetchModules();
         this.log('Modules is loaded');
         this.fetchPage();
-
     }
 
     clear(){
@@ -17,20 +16,23 @@ class App {
     }
 
     fetchModules(){
-        document.getElementById("header").innerHTML = fetch("modules/header.html").then(response => response.text()).then(data => document.getElementById("header").innerHTML = data);
-        document.getElementById("menu").innerHTML = fetch("modules/menu.html").then(response => response.text()).then(data => document.getElementById("menu").innerHTML = data);
-        document.getElementById("footer").innerHTML = fetch("modules/footer.html").then(response => response.text()).then(data => document.getElementById("footer").innerHTML = data);
+        this.fetchAndExecute("header", "modules/header.html");
+        this.fetchAndExecute("menu", "modules/menu.html");
+        this.fetchAndExecute("footer", "modules/footer.html");
     }
 
     fetchPage(){
         const urlParams = new URLSearchParams(window.location.search);
         const page = urlParams.get("page") ?? "home";
-        this.fetchAndExecute("content", "pages/"+page+"/index.html");
-        //document.getElementById("content").innerHTML = fetch("pages/"+page+"/index.html").then(response => response.text()).then(data => document.getElementById("content").innerHTML = data);
+        this.fetchAndExecute("content", "pages/"+page+"/index.html", () => {
+            this.loadScript("pages/"+page+"/page.js", () => {
+                const page = new Page();
+            });
+        });
         this.log('App ' + page + ' loaded');
     }
 
-    fetchAndExecute(elementId, url) {
+    fetchAndExecute(elementId, url, callback) {
         fetch(url)
             .then(response => response.text())
             .then(data => {
@@ -40,9 +42,16 @@ class App {
                 for (let script of scripts) {
                     eval(script.innerHTML);
                 }
+                if (callback) callback();
             });
     }
 
+    loadScript(url, callback) {
+        const script = document.createElement("script");
+        script.src = url;
+        script.onload = callback;
+        document.head.appendChild(script);
+    }
 }
 
-const  app = new App(1);
+const app = new App(1);
