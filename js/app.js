@@ -16,7 +16,7 @@ class App {
     }
 
     fetchModules(){
-        this.fetchAndExecute("header", "modules/header.html");
+        // this.fetchAndExecute("header", "modules/header.html");
         this.fetchAndExecute("menu", "modules/menu.html");
         this.fetchAndExecute("footer", "modules/footer.html");
     }
